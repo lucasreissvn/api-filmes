@@ -27,4 +27,17 @@ public class FilmeService {
     public void deletarFilme(Long id){
         filmeRepository.deleteById(id);
     }
+
+    public Filme atualizarFilme(Long id, Filme filme){
+        Filme filmeExistente = filmeRepository.findById(id).orElseThrow(() -> new RuntimeException("Filme não encontrado"));
+
+        filmeExistente.setNome(filme.getNome());
+        filmeExistente.setDuracao(filme.getDuracao());
+        filmeExistente.setGenero(filme.getGenero());
+        filmeExistente.setDataLancamento(filme.getDataLancamento());
+        filmeExistente.setNota(filme.getNota());
+
+        return filmeRepository.save(filmeExistente);
+        
+    }
 }
