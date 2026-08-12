@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.api_filmes.entities.Filme;
 import com.example.api_filmes.services.FilmeService;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +34,15 @@ public class FilmeResource {
         return ResponseEntity.ok().body(filmeSalvo);
     }
     
-
     @GetMapping("/{id}")
     public ResponseEntity<Filme> buscaPorId(@PathVariable Long id){
         Optional<Filme> filme = filmeService.buscarPorId(id);
         return ResponseEntity.ok().body(filme.get());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarFilme(@PathVariable Long id){
+        filmeService.deletarFilme(id);
+        return ResponseEntity.noContent().build();
     }
 }
