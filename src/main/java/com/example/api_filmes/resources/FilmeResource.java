@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -38,6 +39,12 @@ public class FilmeResource {
     public ResponseEntity<Filme> buscaPorId(@PathVariable Long id){
         Optional<Filme> filme = filmeService.buscarPorId(id);
         return ResponseEntity.ok().body(filme.get());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Filme> atualizarFilme(@PathVariable Long id,@RequestBody Filme filme){
+        Filme filmeAtualizado = filmeService.atualizarFilme(id, filme);
+        return ResponseEntity.ok().body(filmeAtualizado);  
     }
 
     @DeleteMapping("/{id}")
