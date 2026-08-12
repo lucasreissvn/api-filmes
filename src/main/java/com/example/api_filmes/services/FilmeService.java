@@ -2,9 +2,12 @@ package com.example.api_filmes.services;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.example.api_filmes.entities.Filme;
 import com.example.api_filmes.repositories.FilmeRepository;
 
+@Service
 public class FilmeService {
 
     private final FilmeRepository filmeRepository;
