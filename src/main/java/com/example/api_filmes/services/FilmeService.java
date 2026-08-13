@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.api_filmes.dto.FilmeDTO;
 import com.example.api_filmes.entities.Filme;
 import com.example.api_filmes.repositories.FilmeRepository;
 
@@ -20,7 +21,15 @@ public class FilmeService {
         return filmeRepository.findById(id);
     }
 
-    public Filme salvarFilme(Filme filme){
+    public Filme salvarFilme(FilmeDTO filmeDTO){
+        Filme filme = new Filme();
+
+        filme.setNome(filmeDTO.nome());
+        filme.setDuracao(filmeDTO.duracao());
+        filme.setGenero(filmeDTO.genero());
+        filme.setDataLancamento(filmeDTO.dataLancamento());
+        filme.setNota(filmeDTO.nota());
+
         return filmeRepository.save(filme);
     }
 
@@ -28,14 +37,14 @@ public class FilmeService {
         filmeRepository.deleteById(id);
     }
 
-    public Filme atualizarFilme(Long id, Filme filme){
+    public Filme atualizarFilme(Long id, FilmeDTO filmeDTO){
         Filme filmeExistente = filmeRepository.findById(id).orElseThrow(() -> new RuntimeException("Filme não encontrado"));
 
-        filmeExistente.setNome(filme.getNome());
-        filmeExistente.setDuracao(filme.getDuracao());
-        filmeExistente.setGenero(filme.getGenero());
-        filmeExistente.setDataLancamento(filme.getDataLancamento());
-        filmeExistente.setNota(filme.getNota());
+        filmeExistente.setNome(filmeDTO.nome());
+        filmeExistente.setDuracao(filmeDTO.duracao());
+        filmeExistente.setGenero(filmeDTO.genero());
+        filmeExistente.setDataLancamento(filmeDTO.dataLancamento());
+        filmeExistente.setNota(filmeDTO.nota());
 
         return filmeRepository.save(filmeExistente);
         
