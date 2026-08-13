@@ -5,8 +5,11 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.api_filmes.dto.FilmeDTO;
 import com.example.api_filmes.entities.Filme;
 import com.example.api_filmes.services.FilmeService;
+
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +33,8 @@ public class FilmeResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Filme> salvarFilme(@RequestBody Filme filme) {
-        Filme filmeSalvo = filmeService.salvarFilme(filme);
+    public ResponseEntity<Filme> salvarFilme(@Valid @RequestBody FilmeDTO filmeDTO) {
+        Filme filmeSalvo = filmeService.salvarFilme(filmeDTO);
         return ResponseEntity.ok().body(filmeSalvo);
     }
     
@@ -42,8 +45,8 @@ public class FilmeResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Filme> atualizarFilme(@PathVariable Long id,@RequestBody Filme filme){
-        Filme filmeAtualizado = filmeService.atualizarFilme(id, filme);
+    public ResponseEntity<Filme> atualizarFilme(@PathVariable Long id,@Valid @RequestBody FilmeDTO filmeDTO){
+        Filme filmeAtualizado = filmeService.atualizarFilme(id, filmeDTO);
         return ResponseEntity.ok().body(filmeAtualizado);  
     }
 
