@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class FilmeResource {
 
-    private FilmeService filmeService;
+    private final FilmeService filmeService;
 
     public FilmeResource(FilmeService filmeService) {
         this.filmeService = filmeService;
@@ -40,8 +40,8 @@ public class FilmeResource {
     
     @GetMapping("/{id}")
     public ResponseEntity<Filme> buscaPorId(@PathVariable Long id){
-        Optional<Filme> filme = filmeService.buscarPorId(id);
-        return ResponseEntity.ok().body(filme.get());
+        Filme filme = filmeService.buscarPorId(id);
+        return ResponseEntity.ok().body(filme);
     }
 
     @PutMapping("/{id}")

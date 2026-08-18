@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.api_filmes.dto.FilmeDTO;
 import com.example.api_filmes.entities.Filme;
+import com.example.api_filmes.exceptions.FilmeNaoEncontradoException;
 import com.example.api_filmes.repositories.FilmeRepository;
 
 @Service
@@ -17,8 +18,9 @@ public class FilmeService {
         this.filmeRepository=filmeRepository;
     }
 
-    public Optional<Filme> buscarPorId(Long id){
-        return filmeRepository.findById(id);
+    public Filme buscarPorId(Long id){
+        return filmeRepository.findById(id)
+        .orElseThrow(() -> new FilmeNaoEncontradoException(id));
     }
 
     public Filme salvarFilme(FilmeDTO filmeDTO){
@@ -33,7 +35,11 @@ public class FilmeService {
         return filmeRepository.save(filme);
     }
 
-    public void deletarFilme(Long id){
+    public void deletarFilme(Long id) {
+        if (!filmeRepository.existsById(id)) {
+            throw new FilmeNaoEncontradoException(id);
+        }
+
         filmeRepository.deleteById(id);
     }
 
