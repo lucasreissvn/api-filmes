@@ -1,7 +1,5 @@
 package com.example.api_filmes.services;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.example.api_filmes.dto.FilmeDTO;

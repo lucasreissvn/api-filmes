@@ -1,7 +1,5 @@
 package com.example.api_filmes.resources;
 
-import java.util.Optional;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
