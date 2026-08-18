@@ -16,4 +16,13 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(DiretorNaoEncontradoException.class)
+    public ResponseEntity<String> handleDiretorNaoEncontrado(
+            DiretorNaoEncontradoException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ex.getMessage());
+    }
 }
