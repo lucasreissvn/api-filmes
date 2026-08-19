@@ -1,5 +1,7 @@
 package com.example.api_filmes.resources;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +38,12 @@ public class FilmeResource {
         return ResponseEntity.ok().body(filmeSalvo);
     }
     
+    @GetMapping
+    public ResponseEntity<List<Filme>> buscarTodos(){
+        List<Filme> filmes = filmeService.buscarTodos();
+        return ResponseEntity.ok().body(filmes);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Filme> buscaPorId(@PathVariable Long id){
         Filme filme = filmeService.buscarPorId(id);

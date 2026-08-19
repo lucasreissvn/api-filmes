@@ -1,5 +1,7 @@
 package com.example.api_filmes.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.api_filmes.dto.FilmeDTO;
@@ -19,6 +21,10 @@ public class FilmeService {
     public FilmeService(FilmeRepository filmeRepository,DiretorRepository diretorRepository){
         this.filmeRepository=filmeRepository;
         this.diretorRepository=diretorRepository;
+    }
+
+    public List<Filme>buscarTodos(){
+        return filmeRepository.findAll();
     }
 
     public Filme buscarPorId(Long id){
