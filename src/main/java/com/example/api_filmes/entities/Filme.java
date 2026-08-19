@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,15 +23,20 @@ public class Filme {
     private LocalDate dataLancamento;
     private Double nota;
 
+    @ManyToOne
+    @JoinColumn(name = "diretor_id")
+    private Diretor diretor;
+
     public Filme(){}
 
-    public Filme(Long id, String nome, Integer duracao, String genero, LocalDate dataLancamento, Double nota) {
+    public Filme(Long id, String nome, Integer duracao, String genero, LocalDate dataLancamento, Double nota,Diretor diretor) {
         this.id = id;
         this.nome = nome;
         this.duracao = duracao;
         this.genero = genero;
         this.dataLancamento = dataLancamento;
         this.nota = nota;
+        this.diretor=diretor;
     }
 
     public Long getId() {
@@ -80,6 +87,13 @@ public class Filme {
         this.nota = nota;
     }
 
-    
+    public Diretor getDiretor() {
+        return diretor;
+    }
+
+    public void setDiretor(Diretor diretor) {
+        this.diretor = diretor;
+    }
+
 
 }
