@@ -1,5 +1,7 @@
 package com.example.api_filmes.resources;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,12 @@ public class DiretorResource{
         return ResponseEntity.ok().body(diretorSalvo);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Diretor>> buscarTodos(){
+        List<Diretor> diretores = diretorService.buscarTodos();
+        return ResponseEntity.ok().body(diretores);
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<Diretor> buscarPorId(@PathVariable Long id){
         Diretor diretor = diretorService.buscarPorId(id);
