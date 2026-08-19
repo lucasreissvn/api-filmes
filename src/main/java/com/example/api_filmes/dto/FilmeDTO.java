@@ -14,5 +14,6 @@ public record FilmeDTO(
     @Positive Integer duracao,
     @NotBlank String genero,
     @NotNull LocalDate dataLancamento,
-    @PositiveOrZero @Max(10) Double nota
+    @PositiveOrZero @Max(10) Double nota,
+    @NotNull Long idDiretor
 ){}
